@@ -10,7 +10,6 @@ require($_SERVER["DOCUMENT_ROOT"].'\studentManagement\dbhelp.php');
 </head>
 <body>
 <?php
-    $conn = mysqli_connect('localhost', 'root', '', 'db_studentmanagement');
     if (isset($_REQUEST['username'])){
 
     // check if username is already in database

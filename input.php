@@ -1,5 +1,5 @@
 <?php
-require_once('dbhelp.php');
+require($_SERVER["DOCUMENT_ROOT"].'\studentManagement\dbhelp.php');
 
 $s_name = $s_email = $s_phone = $s_username = $s_password = '';
 
@@ -47,7 +47,7 @@ if (!empty($_POST)) {
 
 	execute($sql);
 
-	header('location: student.php');
+	header('location: viewAllUsers.php');
 	die();
 }
 $id = '';

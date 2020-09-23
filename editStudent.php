@@ -5,9 +5,6 @@ $s_name = $s_email = $s_phone = $s_username = $s_password = '';
 
 if (!empty($_POST)) {
   $s_id = '';
-  if (isset($_POST['name'])){
-    $s_name = $_POST['name'];
-  }
 
   if (isset($_POST['email'])){
     $s_email = $_POST['email'];
@@ -15,10 +12,6 @@ if (!empty($_POST)) {
 
   if (isset($_POST['phone'])){
     $s_phone = $_POST['phone'];
-  }
-
-  if (isset($_POST['username'])){
-    $s_username = $_POST['username'];
   }
 
   if (isset($_POST['password'])){
@@ -29,15 +22,13 @@ if (!empty($_POST)) {
     $s_id = $_POST['id'];
   }
 
-  $s_name = str_replace('\'', '\\\'', $s_name);
   $s_email = str_replace('\'', '\\\'', $s_email);
   $s_phone = str_replace('\'', '\\\'', $s_phone);
-  $s_username = str_replace('\'', '\\\'', $s_username);
   $s_password = str_replace('\'', '\\\'', $s_password);
   $s_id = str_replace('\'', '\\\'', $s_id);
 
   // Update user
-  $sql = "update users set name = '$s_name', email = '$s_email', phone = '$s_phone', username = '$s_username', password ='$s_password' where id = ".$s_id;
+  $sql = "update users set email = '$s_email', phone = '$s_phone', password ='$s_password' where id = ".$s_id;
 
   execute($sql);
 
@@ -48,9 +39,9 @@ $id = '';
 if(isset($_GET['id'])){
   $id = $_GET['id'];
   $sql = 'select * from users where id = ' .$id;
-  $teacherList = executeResult($sql);
-  if($teacherList != null && count($teacherList) > 0){
-    $std = $teacherList[0];
+  $studentList = executeResult($sql);
+  if($studentList != null && count($studentList) > 0){
+    $std = $studentList[0];
     $s_name = $std['name'];
     $s_email = $std['email'];
     $s_phone = $std['phone'];
@@ -65,7 +56,7 @@ if(isset($_GET['id'])){
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Edit Teacher Form</title>
+  <title>Edit Student Form</title>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
@@ -82,7 +73,7 @@ if(isset($_GET['id'])){
   <div class="container">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h2 class="text-center">Edit Teacher</h2>
+        <h2 class="text-center">Edit Student</h2>
       </div>
       <div class="panel-body">
         <form method="post" >

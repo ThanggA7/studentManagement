@@ -1,4 +1,9 @@
 <?php
+//create connection toi database
+$conn = mysqli_connect('localhost', 'root', '', 'db_studentmanagement');
+if(mysqli_connect_errno()) {
+	die("MySQL connection failed: ". mysqli_connect_error());
+}
 
 /**
  * insert, update, delete -> su dung function
@@ -14,10 +19,10 @@ function execute($sql) {
 	mysqli_close($conn);
 }
 
-/**
- * su dung cho lenh select => tra ve ket qua
- */
+
+//  su dung cho lenh select => tra ve 1 mảng các đối tượng
 function executeResult($sql) {
+
 	//create connection toi database
 	$conn = mysqli_connect('localhost', 'root', '', 'db_studentmanagement');
 

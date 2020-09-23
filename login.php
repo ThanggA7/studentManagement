@@ -22,7 +22,6 @@
 <?php
   session_start();
   require($_SERVER["DOCUMENT_ROOT"].'\studentManagement\dbhelp.php');
-  $conn = mysqli_connect('localhost', 'root', '', 'db_studentmanagement');
   if (isset($_POST['username'])){   
     $username = stripslashes($_REQUEST['username']);
     $username = mysqli_real_escape_string($conn,$username);
@@ -60,7 +59,7 @@
 <input type="password" name="password" placeholder="Mật khẩu" required />
 <input name="submit" type="submit" value="Đăng nhập" />
 </form>
-<p>Bạn chưa có tài khoản? <a href='registration.php'>Đăng ký ngay</a></p><br/>
+<!-- <p>Bạn chưa có tài khoản? <a href='registration.php'>Đăng ký ngay</a></p><br/> -->
 </div>
 <?php } ?>
 </body>

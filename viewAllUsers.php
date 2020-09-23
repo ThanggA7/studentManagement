@@ -32,6 +32,7 @@ require($_SERVER["DOCUMENT_ROOT"].'\studentManagement\dbhelp.php');
             <tr>
               <th>Stt</th>
               <th>Họ & tên</th>
+              <th>Username</th>
               <th>Email</th>
               <th>Số điện thoại</th>
               <th>Vị trí</th>
@@ -48,29 +49,32 @@ else{
   $sql = 'select * from users';
 }
 $userList = executeResult($sql);
+// echo mysqli_num_rows($userList);
 
 $index = 1;
+session_start();
 foreach ($userList as $usr) {
   echo '<tr>
       <td>'.($index++).'</td>
       <td>'.$usr['name'].'</td>
+      <td>'.$usr['username'].'</td>
       <td>'.$usr['email'].'</td>
       <td>'.$usr['phone'].'</td>
       <td>'.$usr['position'].'</td>';
-      echo '<td><button class="btn btn-primary" onclick="window.location=\'http://localhost:8081/studentManagement/View/messageView.php?id='.$usr['id'].'\'">Message</button></td>';
+      echo '<td><button class="btn btn-primary" onclick="window.location=\'http://localhost:8081/studentManagement/messageView.php?id1='.$usr['id'].'\'">Message</button></td>';
       if ($_SESSION['position']=='Teacher' && $_SESSION['position']!=$usr['position']){
-      	echo '<td><button class="btn btn-warning" onclick=\'window.open("input.php?id='.$usr['id'].'","_self")\'>Edit</button></td>;
+      	echo '<td><button class="btn btn-warning" onclick=\'window.open("editStudent.php?id='.$usr['id'].'","_self")\'>Edit</button></td>
       	<td><button class="btn btn-danger" onclick="deleteStudent('.$usr['id'].')">Delete</button></td>';
       }
-      else{
-      	echo "Ban la sinh vien";
-      }
     echo '</tr>';
+}
+if($_SESSION['position'] == "Teacher"){
+  echo '<button class="btn btn-success" onclick=\'window.open("addStudent.php")\'>Add Student</button> ';
 }
 ?>
           </tbody>
         </table>
-        <button class="btn btn-success" onclick="window.open('input.php', '_self')">Add Student</button>
+        <!-- <button class="btn btn-success" onclick="window.open('addStudent.php', '_self')">Add Student</button> -->
       </div>
      </div>
   </div>
@@ -81,7 +85,7 @@ foreach ($userList as $usr) {
         return;
       }
       console.log(id)
-      $.post('delete_student.php', {'id': id}, function(data){
+      $.post('deleteStudent.php', {'id': id}, function(data){
         alert(data)
         location.reload() 
       })

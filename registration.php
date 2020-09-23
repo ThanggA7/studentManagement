@@ -18,17 +18,15 @@
 </head>
 <body>
 <?php
-    // require($_SERVER["DOCUMENT_ROOT"].'\studentManagement\config.php');
-    $conn = mysqli_connect('localhost', 'root', '', 'db_studentmanagement');
     require($_SERVER["DOCUMENT_ROOT"].'\studentManagement\dbhelp.php');
     if (isset($_REQUEST['username'])){
 
     // check if username is already in database
     $username = $_REQUEST['username'];
-    $sql_u = "SELECT * FROM users WHERE username='$username'";
-    $res_u = mysqli_query($conn, $sql_u);
+    $sql= "SELECT * FROM users WHERE username='$username'";
+    $res = mysqli_query($conn, $sql);
 
-    if (mysqli_num_rows($res_u) > 0) {
+    if (mysqli_num_rows($res) > 0) {
       echo "<div class='form'><h3>Username đã tồn tại, vui lòng nhập lại.</h3><br/>Click để <a href='registration.php'>Quay lại</a></div>";
     }
 
