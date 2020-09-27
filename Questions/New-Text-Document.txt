@@ -1,0 +1,21 @@
+import sys
+
+if __name__ == '__main__':
+    # fptr = open(os.environ['OUTPUT_PATH'], 'w')
+    fptr = sys.stdout
+
+    stack1 = []
+    stack2 = []
+    q = int(input())
+
+    for q_itr in range(q):
+        query = input().split()
+        type = int(query[0])
+        if type == 1:
+            
+        if type == 2:
+           
+	if type == 3:
+             
+
+    fptr.close()

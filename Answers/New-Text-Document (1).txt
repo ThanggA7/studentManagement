@@ -1,0 +1,47 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+bool binarySearch(int arr[], int l, int r, int x) 
+{ 
+    while (r >= l) { 
+        int mid = (l+r) / 2; 
+ 
+        if (arr[mid] == x) 
+            return true; 
+  
+        if (arr[mid] > x) r = mid-1; 
+        else l = mid + 1 ;
+    } 
+  
+    return false; 
+} 
+
+int main() {
+        int n,m,a,c,X;
+    
+        cin >> n >> m >> a >> c >> X;
+    
+        int arr[n];
+    
+        arr[0] = (a*X+c)%m;
+    
+        for (int i=1;i<n;i++)
+        {
+            arr[i] = (a*arr[i-1]+c)%m;
+        }
+    
+        int count = 0;
+    
+        for (int i=0;i<n;i++)
+        {
+            if (binarySearch(arr,0,n-1,arr[i])) count ++;
+        }
+        cout << count;
+    
+    return 0;
+}

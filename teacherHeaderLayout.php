@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <title>CSS Website Layout</title>
+    <title>Teacher Layout</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -32,7 +32,7 @@
             display: block;
             color: #f2f2f2;
             text-align: center;
-            padding: 14px 16px;
+            padding: 14px 14px;
             text-decoration: none;
         }
 
@@ -54,10 +54,12 @@ $position = $_SESSION['position']
 </div>
 
 <div class="topnav">
-    <a href="studentView.php">Trang chủ</a>
-    <a href="editStudent.php?id=<?php echo $id ?>&position=Student">Sửa thông tin</a>
-    <a href="viewAllUsers.php?position=Student">Xem danh sách người dùng</a>
-    <a href="listQuestions.php?position=Student">Xem danh sách bài tập</a>
+    <a href="teacherView.php">Trang chủ</a>
+    <a href="editTeacher.php?id=<?php echo $id ?>">Sửa thông tin</a>
+    <a href="addStudent.php">Thêm sinh viên</a>
+    <a href="viewAllUsers.php?position=Teacher">Xem danh sách người dùng</a>
+    <a href="listQuestions.php?position=Teacher">Xem danh sách bài tập</a>
+    <a href="addQuestion.php">Thêm bài tập</a>
     <a href="viewChallenge.php">Xem Challenge</a>
     <a href="listMessageReceive.php?id=<?php echo $id ?>&position=<?php echo $position ?>">Hộp thư đến</a>
     <a href="listMessageSend.php?id=<?php echo $id ?>&position=<?php echo $position ?>">Hộp thư đi</a>

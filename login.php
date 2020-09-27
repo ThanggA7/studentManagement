@@ -1,7 +1,5 @@
-<?php
-?>
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
 <meta charset="utf-8">
 <title>Đăng nhập</title>
@@ -20,9 +18,9 @@
 </head>
 <body>
 <?php
-  session_start();
-  require($_SERVER["DOCUMENT_ROOT"].'\studentManagement\dbhelp.php');
-  if (isset($_POST['username'])){   
+session_start();
+require('dbhelp.php');
+if (isset($_POST['username'])){   
     $username = stripslashes($_REQUEST['username']);
     $username = mysqli_real_escape_string($conn,$username);
     $password = stripslashes($_REQUEST['password']);
@@ -50,7 +48,8 @@
     else{
       echo "<div class='form'><h3>Tên đăng nhập hoặc mật khẩu không đúng!</h3></br><a href='login.php'>Đăng nhập lại</a></div>";
     }
-  }else{
+  }
+else{
 ?>
 <div class="form">
 <h1>Đăng nhập</h1>
