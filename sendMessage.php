@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
     $idReceive = stripslashes($_GET['id']);
     $idReceive = mysqli_real_escape_string($conn, $idReceive);
     $receiver = stripslashes($_GET['usr']);
-    $receiver = mysqli_real_escape_string($conn, $idReceive);
+    $receiver = mysqli_real_escape_string($conn, $receiver);
     $position = $_GET['position'];
     $idSend = $_SESSION['userID'];
     $sender = $_SESSION['username'];
