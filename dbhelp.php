@@ -1,6 +1,6 @@
 <?php
 //create connection toi database
-$conn = mysqli_connect('localhost', 'root', '', 'db_studentmanagement');
+$conn = mysqli_connect('localhost', 'root', '', 'db_studentmanagement6a');
 if (mysqli_connect_errno()) {
     die("MySQL connection failed: " . mysqli_connect_error());
 }
@@ -11,7 +11,7 @@ if (mysqli_connect_errno()) {
 function execute($sql)
 {
     //create connection toi database
-    $conn = mysqli_connect('localhost', 'root', '', 'db_studentmanagement');
+    $conn = mysqli_connect('localhost', 'root', '', 'db_studentmanagement6a');
 
     //query
     mysqli_query($conn, $sql);
@@ -26,7 +26,7 @@ function executeResult($sql)
 {
 
     //create connection toi database
-    $conn = mysqli_connect('localhost', 'root', '', 'db_studentmanagement');
+    $conn = mysqli_connect('localhost', 'root', '', 'db_studentmanagement6a');
 
     //query
     $resultset = mysqli_query($conn, $sql);

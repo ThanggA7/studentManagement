@@ -20,7 +20,11 @@
 <?php
 session_start();
 require('dbhelp.php');
-if (isset($_POST['username'])){   
+require 'vendor/autoload.php';
+use Twilio\Rest\Client;
+$sid = "ACebffded77cf4bc0c0f64057c6f0b6341";
+$token = "75e7d9628796438b93018c964af4cf87";
+if (isset($_POST['submit'])){   
     $username = stripslashes($_REQUEST['username']);
     $username = mysqli_real_escape_string($conn,$username);
     $password = stripslashes($_REQUEST['password']);
@@ -34,29 +38,47 @@ if (isset($_POST['username'])){
       $_SESSION['username'] = $username;
       $_SESSION['position'] = $temp['position'];
       $_SESSION['userID'] = $temp['id'];
-      if ($temp['position'] == "Teacher") {
-      	header("Location: teacherView.php");
-      }
-      else if ($temp['position'] == "Student") {
-      	header("Location: studentView.php");
-      }
-      else
-      {
-        echo "Loi";
-      }
+      $phone = $temp['phone'];
+      // echo $phone;
+      //send pin.
+      $pin = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
+      $sql = "UPDATE users SET pin = '$pin'  WHERE id = '" . $temp['id'] . "'";
+      mysqli_query($conn, $sql);
+      $client = new Client($sid, $token);
+      $client->messages->create(
+          $phone, array(
+              "from" => "+13132635133",
+              "body" => "Your verified code is: ". $pin
+          )
+      );
+      header("Location: verified.php");
     }
     else{
       echo "<div class='form'><h3>Tên đăng nhập hoặc mật khẩu không đúng!</h3></br><a href='login.php'>Đăng nhập lại</a></div>";
     }
   }
+elseif(isset($_POST['fbsubmit'])){
+  require_once( 'Facebook/autoload.php' );
+  $fb = new Facebook\Facebook([
+    'app_id' => '397768601400691',
+    'app_secret' => '75b9049c28a5c3704436267dba13477b',
+    'default_graph_version' => 'v8.0',
+    ]);
+  $helper = $fb->getRedirectLoginHelper();
+  $permissions = ['email']; // Optional permissions
+  $loginUrl = $helper->getLoginUrl('http://site.test/studentManagement6a/fbcallback.php', $permissions);
+  header("Location: $loginUrl");
+}
 else{
 ?>
 <div class="form">
 <h1>Đăng nhập</h1>
 <form action="" method="post" name="login">
-<input type="text" name="username" placeholder="Tên đăng nhập" required />
-<input type="password" name="password" placeholder="Mật khẩu" required />
+<input type="text" name="username" placeholder="Tên đăng nhập" />
+<input type="password" name="password" placeholder="Mật khẩu" />
 <input name="submit" type="submit" value="Đăng nhập" />
+<input name="fbsubmit" type="submit" value="Login with facebook" />
+<!-- <a href="' . $loginUrl . '">Log in with Facebook!</a> -->
 </form>
 <!-- <p>Bạn chưa có tài khoản? <a href='registration.php'>Đăng ký ngay</a></p><br/> -->
 </div>
